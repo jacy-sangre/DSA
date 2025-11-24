@@ -1,0 +1,40 @@
+#include <iostream>
+#include <vector>
+#include <stack>
+#include <climits>
+
+using namespace std;
+
+bool verifyPre(vector<int>& pre){
+    stack<int> st;
+    int minValue = INT_MIN;
+    
+    for(int val : pre){
+        if(val < minValue) return false;
+        while(!st.empty() && val > st.top()){
+            minValue = st.top();
+            st.pop();
+        }
+        st.push(val);
+    }
+    
+    return true;
+}
+
+int main(){
+    
+    int n, num;
+    cout << "Enter number of elements: ";
+    cin >> n;
+    
+    vector<int> arr;
+    
+    
+    cout << "Enter preorder: ";
+    for(int i = 0; i < n; i++){
+        cin >> num;
+        arr.push_back(num);
+    }
+    
+    cout << (verifyPre(arr) ? "VALID" : "INVALID");
+}
