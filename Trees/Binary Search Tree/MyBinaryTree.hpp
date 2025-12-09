@@ -160,7 +160,7 @@ class MyBinaryTree : public BinaryTree{
     }
 
     int height(){
-        return -1;
+        
     }
     int depth(){
         return -1;

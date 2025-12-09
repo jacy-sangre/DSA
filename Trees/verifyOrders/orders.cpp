@@ -5,7 +5,7 @@
 
 using namespace std;
 
-bool verifyPre(vector<int>& pre){
+bool verifyPost(vector<int>& pre){
     stack<int> st;
     int minValue = INT_MIN;
     
@@ -13,6 +13,22 @@ bool verifyPre(vector<int>& pre){
         int val = pre[i];
         if(val > minValue) return false;
         while(!st.empty() && val < st.top()){
+            minValue = st.top();
+            st.pop();
+        }
+        st.push(val);
+    }
+    
+    return true;
+}
+
+bool verifyPre(vector<int>& pre){
+    stack<int> st;
+    int minValue = INT_MIN;
+    
+    for(int val : pre){
+        if(val < minValue) return false;
+        while(!st.empty() && val > st.top()){
             minValue = st.top();
             st.pop();
         }
@@ -37,5 +53,5 @@ int main(){
         arr.push_back(num);
     }
     
-    cout << (verifyPre(arr) ? "VALID" : "INVALID");
+    cout << (verifyPost(arr) ? "VALID" : "INVALID");
 }
